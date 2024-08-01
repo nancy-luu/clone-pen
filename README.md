@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Clone Pen
 
-## Getting Started
+This side project was a means for me to explore and understand CodeMirror's mechanics better to build a functional clone of CodePen.
 
-First, run the development server:
+Live Site: [https://clone-pen.vercel.app/](https://clone-pen.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Process
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To get started, I referenced [this tutorial](https://youtu.be/wcVxX7lu2d4?si=BbiXlHVb2ZhEodRb).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+My project diverges from the tutorial in several key aspects:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Given that Vercel is optimized for Next.js, I chose to build my application using this framework to leverage its seamless deployment and performance benefits. This project involves configuring initial states for editor windows and providing users with the ability to reset them, which has deepened my understanding of manipulating and rendering rich text and illustrating CodeMirror's potential applications in various scenarios.
 
-## Learn More
+Technologies:
+Code Mirror | React | Next.js | CSS 
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Blockers and Lessons Learned
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+When setting the initial state for my HTML using a JSX file, I used `renderToStaticMarkup` from the `react-dom/server` package to render React components to static HTML. This method is intended for server-side use and led to issues when rendering the Goldfish component, which relies on browser-specific APIs. To resolve errors related to undefined browser-specific properties (like `navigate`), I dynamically imported this and other components with `{ ssr: false }` to ensure they are only rendered on the client side, avoiding server-side rendering issues. 
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## What Next? 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This application is not yet optimized for mobile viewing and will be in the future as I plan to use ClonePen as a foundation for another future project. 
+
+Stay tuned for updates! 👩🏻‍💻
