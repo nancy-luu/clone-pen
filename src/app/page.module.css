@@ -55,7 +55,7 @@
 
 .editorContainer.collapsed {
   flex-grow: 0;
-  background-color: hsl(0, 0%, 100%);
+  border: 1px solid transparent;
 }
 
 .CodeMirrorScroll {
