@@ -1,11 +1,8 @@
 import React from "react";
 
-// Styles
-import './GoldfishStyles.js'
-
 export default function Goldfish () {
   return (
-    <div className="example-window">
+    <div class="example-window">
      <div class="example-container">
       <div class="bubble"></div>
       <div class="head">

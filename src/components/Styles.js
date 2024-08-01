@@ -1,4 +1,4 @@
-const GoldfishCSS = `.example-container{    
+const Styles = `.example-container{    
     background:  linear-gradient(to right, 	   rgba(62,186,224,1) 0%, 
     rgba(155,207,224,1) 50%, rgba(105,189,219,1) 100%);
     display: flex;
@@ -363,4 +363,4 @@ const GoldfishCSS = `.example-container{
   
 `;
 
-export default GoldfishCSS;
+export default Styles;

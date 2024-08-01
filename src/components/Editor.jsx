@@ -4,11 +4,17 @@ import "codemirror/theme/lesser-dark.css";
 import "codemirror/mode/xml/xml";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/css/css";
-import { Controlled as ControlledEditor } from "react-codemirror2";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompressAlt, faExpandAlt } from "@fortawesome/free-solid-svg-icons";
+import dynamic from 'next/dynamic';
 
 import styles from "@/app/page.module.css";
+
+const DynamicControlledEditor = dynamic(() => import('react-codemirror2').then(mod => mod.Controlled), { ssr: false });
+
+const DynamicFontAwesomeIcon = dynamic(() => import('@fortawesome/react-fontawesome').then(mod => mod.FontAwesomeIcon), { ssr: false });
+const DynamicFaCompressAlt = dynamic(() => import('@fortawesome/free-solid-svg-icons').then(mod => mod.faCompressAlt), { ssr: false });
+const DynamicFaExpandAlt = dynamic(() => import('@fortawesome/free-solid-svg-icons').then(mod => mod.faExpandAlt), { ssr: false });
+
+
 
 export default function Editor(props) {
   const {
@@ -45,10 +51,10 @@ export default function Editor(props) {
           className={styles.expandCollapseBtn}
           onClick={() => setOpen((prevOpen) => !prevOpen)}
         >
-          <FontAwesomeIcon icon={open ? faCompressAlt : faExpandAlt} />
+          <DynamicFontAwesomeIcon icon={open ? DynamicFaCompressAlt : DynamicFaExpandAlt} />
         </button>
       </div>
-      <ControlledEditor
+      <DynamicControlledEditor
         onBeforeChange={handleChange}
         value={value}
         className={styles.codeMirrorWrapper}

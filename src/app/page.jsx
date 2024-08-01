@@ -1,20 +1,21 @@
-// pages/index.js
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
-import Collection from "@/components/Collection";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import Goldfish from "@/components/Goldfish";
-import GoldfishCSS from "@/components/GoldfishStyles";
+import dynamic from "next/dynamic";
+import { renderToStaticMarkup } from "react-dom/server"; 
+import Styles from "@/components/Styles"; 
 
-// convert JSX to HTML string
-import { renderToStaticMarkup } from "react-dom/server";
+
+// Dynamic imports for client-side components
+// Handle navigate is not defined error
+const DynamicGoldfish = dynamic(() => import("../components/Goldfish"), { ssr: false });
+const DynamicCollection = dynamic(() => import("../components/Collection"), { ssr: false });
 
 export default function Home() {
-  const initialHtml = renderToStaticMarkup(<Goldfish />);
-
+  const initialHtml = renderToStaticMarkup(<DynamicGoldfish />); 
   const [html, setHtml] = useLocalStorage("html", initialHtml);
-  const [css, setCss] = useLocalStorage("css", GoldfishCSS);
+  const [css, setCss] = useLocalStorage("css", Styles); 
   const [js, setJs] = useLocalStorage("js", `console.log('Hello World!');`);
   const [srcDoc, setSrcDoc] = useState("");
 
@@ -40,8 +41,8 @@ export default function Home() {
 
   const resetDemo = () => {
     setHtml(initialHtml);
-    setCss(GoldfishCSS);
-    setJs(`console.log('Hello World!');`)
+    setCss(Styles); 
+    setJs(`console.log('Hello World!');`);
   };
 
   return (
@@ -55,7 +56,7 @@ export default function Home() {
           Demo
         </button>
       </div>
-      <Collection
+      <DynamicCollection
         html={html}
         setHtml={setHtml}
         css={css}
