@@ -20,6 +20,18 @@ export default function Home() {
   const [srcDoc, setSrcDoc] = useState("");
 
   useEffect(() => {
+    const loadInitialHtml = async () => {
+      const { default: DynamicGoldfish } = await import("../components/Goldfish");
+      const initialHtml = renderToStaticMarkup(<DynamicGoldfish />);
+      setHtml(initialHtml);
+      setCss(Styles); 
+      setJs(`console.log('Hello World!');`);
+    };
+
+    loadInitialHtml();
+  }, []);
+
+  useEffect(() => {
     const timeout = setTimeout(() => {
       setSrcDoc(`
         <html>
