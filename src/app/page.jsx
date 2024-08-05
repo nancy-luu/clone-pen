@@ -5,25 +5,30 @@ import useLocalStorage from "@/hooks/useLocalStorage";
 import dynamic from "next/dynamic";
 import { renderToStaticMarkup } from "react-dom/server"; 
 import Styles from "@/components/Styles"; 
+import Goldfish from "@/components/Goldfish"; 
 
 
 // Dynamic imports for client-side components
 // Handle navigate is not defined error
-const DynamicGoldfish = dynamic(() => import("../components/Goldfish"), { ssr: false });
+// const DynamicGoldfish = dynamic(() => import("../components/Goldfish"), { ssr: false });
 const DynamicCollection = dynamic(() => import("../components/Collection"), { ssr: false });
 
 export default function Home() {
-  const initialHtml = renderToStaticMarkup(<DynamicGoldfish />); 
-  const [html, setHtml] = useLocalStorage("html", initialHtml);
+  // const initialHtml = renderToStaticMarkup(<DynamicGoldfish />); 
+  // const [html, setHtml] = useLocalStorage("html", initialHtml);
+
+  const [html, setHtml] = useLocalStorage("html", Goldfish);
   const [css, setCss] = useLocalStorage("css", Styles); 
   const [js, setJs] = useLocalStorage("js", `console.log('Hello World!');`);
   const [srcDoc, setSrcDoc] = useState("");
 
   useEffect(() => {
     const loadInitialHtml = async () => {
-      const { default: DynamicGoldfish } = await import("../components/Goldfish");
-      const initialHtml = renderToStaticMarkup(<DynamicGoldfish />);
-      setHtml(initialHtml);
+      // const { default: DynamicGoldfish } = await import("../components/x");
+      // const initialHtml = renderToStaticMarkup(<DynamicGoldfish />);
+      // setHtml(initialHtml);
+
+      setHtml(Goldfish);
       setCss(Styles); 
       setJs(`console.log('Hello World!');`);
     };
