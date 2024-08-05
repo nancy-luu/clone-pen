@@ -57,8 +57,8 @@ export default function Home() {
   };
 
   const resetDemo = () => {
+    // setHtml(initialHtml);
     setHtml(Goldfish);
-    setHtml(initialHtml);
     setCss(Styles); 
     setJs(`console.log('Hello World!');`);
   };
